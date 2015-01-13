@@ -23,6 +23,8 @@ import com.puppycrawl.tools.checkstyle.Checker;
 import com.puppycrawl.tools.checkstyle.DefaultConfiguration;
 import org.junit.Test;
 
+import java.io.File;
+
 /**
  *
  * @author  jrichard
@@ -945,6 +947,23 @@ public class IndentationCheckTest extends BaseCheckTestSupport
         checkConfig.addAttribute("lineWrappingIndentation", "8");
         final String[] expected = {};
         verify(checkConfig, getPath("indentation/InputSwitchCustom.java"),
+               expected);
+    }
+
+    @Test
+    public void testAnonymousLambda() throws Exception
+    {
+        final DefaultConfiguration checkConfig =
+                createCheckConfig(IndentationCheck.class);
+        checkConfig.addAttribute("basicOffset", "4");
+        checkConfig.addAttribute("braceAdjustment", "0");
+        checkConfig.addAttribute("caseIndent", "4");
+        checkConfig.addAttribute("throwsIndent", "8");
+        checkConfig.addAttribute("lineWrappingIndentation", "8");
+        checkConfig.addAttribute("arrayInitIndent", "4");
+        final String[] expected = {};
+        verify(checkConfig, new File("src/test/resources-noncompilable/com/puppycrawl/"
+                                     + "tools/checkstyle/grammars/java8/InputAnonimousLambda.java").getCanonicalPath(),
                expected);
     }
 }

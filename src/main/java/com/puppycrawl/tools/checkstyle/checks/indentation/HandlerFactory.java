@@ -21,12 +21,14 @@ package com.puppycrawl.tools.checkstyle.checks.indentation;
 import com.google.common.collect.Maps;
 import com.puppycrawl.tools.checkstyle.api.DetailAST;
 import com.puppycrawl.tools.checkstyle.api.TokenTypes;
+
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.util.Map;
 import java.util.Set;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 /**
  * Factory for handlers. Looks up constructor via reflection.
@@ -107,6 +109,7 @@ public class HandlerFactory
         register(TokenTypes.VARIABLE_DEF, MemberDefHandler.class);
         register(TokenTypes.LITERAL_NEW, NewHandler.class);
         register(TokenTypes.INDEX_OP, IndexHandler.class);
+        register(TokenTypes.LAMBDA, LambdaHandler.class);
     }
 
     /**
